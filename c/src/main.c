@@ -2,19 +2,23 @@
 
 #include "component.h"
 
-int main(void) {
-  SetTargetFPS(60);
+#define WIDTH 200
+#define HEIGHT 60
 
-  InitWindow(640, 480, "Canvas");
+int main(void) {
+  InitWindow(WIDTH, HEIGHT, "Component");
   void *com = ComNew("Component");
 
+  EnableEventWaiting();
   while (!WindowShouldClose()) {
     // Event
-
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+      TraceLog(LOG_INFO, "Clicked!");
+    }
     // Render
     BeginDrawing();
     ClearBackground(WHITE);
-    ComRender(com, 10, 10);
+    ComRender(com, 0, 0);
     EndDrawing();
   }
 

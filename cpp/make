@@ -1,0 +1,2 @@
+mkdir -p build
+g++ -std=c++11 `pkg-config --cflags raylib` -o build/demo src/*.cpp `pkg-config --libs raylib`

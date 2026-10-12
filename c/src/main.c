@@ -17,14 +17,11 @@ int main(void) {
   while (!WindowShouldClose()) {
     /* Event
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-      Rectangle rec1, rec2;
-      ComRec(com1, &rec1);
-      ComRec(com2, &rec2);
       Vector2 pos = GetMousePosition();
-      if (CheckCollisionPointRec(pos, rec1)) {
-        TraceLog(LOG_INFO, "Component 1 clicked!");
-      } else if (CheckCollisionPointRec(pos, rec2)) {
-        TraceLog(LOG_INFO, "Component 2 clicked!");
+      if (CheckCollisionPointRec(pos, *ComRec(com1))) {
+        TraceLog(LOG_INFO, "Component 1 clicked");
+      } else if (CheckCollisionPointRec(pos, *ComRec(com2))) {
+        TraceLog(LOG_INFO, "Component 2 clicked");
       }
     }
     */

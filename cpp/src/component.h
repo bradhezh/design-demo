@@ -3,16 +3,16 @@
 
 #include <raylib.h>
 
+class Window;
+
 class Component {
 public:
   char *text;
   int fontSize;
   Rectangle rec;
 
-  Component(char const *text, int fontSize, int x, int y, int width, int height);
+  Component(char const *text, int fontSize, int x, int y, int width, int height, Window *win);
   ~Component();
-
-  // void Rec(Rectangle *rec);
 
   void Render();
 };

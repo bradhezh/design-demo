@@ -6,7 +6,7 @@
 void *ComNew(char const *text, int fontSize, int x, int y, int width, int height);
 void ComDelete(void *com);
 
-// void ComRec(void *com, Rectangle *rec);
+// Rectangle *ComRec(void *com);
 
 void ComRender(void *com);
 

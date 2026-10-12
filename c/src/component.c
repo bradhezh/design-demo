@@ -31,8 +31,7 @@ void ComDelete(void *com) {
   free(com);
 }
 
-// void ComRec(void *com, Rectangle *rec) { memcpy(rec, &((Component *)com)->rec,
-// sizeof(Rectangle)); }
+// Rectangle *ComRec(void *com) { return &((Component *)com)->rec; }
 
 void ComRender(void *com) {
   Component *com0 = com;

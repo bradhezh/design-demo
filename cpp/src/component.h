@@ -11,6 +11,8 @@ public:
   int fontSize;
   Rectangle rec;
 
+  void (*onClick)();
+
   Component(char const *text, int fontSize, int x, int y, int width, int height, Window *win);
   ~Component();
 

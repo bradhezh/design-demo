@@ -35,16 +35,15 @@ void Window::AddCom(Component *com) {
 void Window::Run() {
   EnableEventWaiting();
   while (!WindowShouldClose()) {
-    /* Event
+    // Event
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
       Vector2 pos = GetMousePosition();
       for (Coms *p = coms; p; p = p->next) {
-        if (CheckCollisionPointRec(pos, p->com->rec)) {
-          TraceLog(LOG_INFO, "%s clicked", p->com->text);
+        if (CheckCollisionPointRec(pos, p->com->rec) && p->com->onClick) {
+          p->com->onClick();
         }
       }
     }
-    */
     // Render
     BeginDrawing();
     ClearBackground(WHITE);

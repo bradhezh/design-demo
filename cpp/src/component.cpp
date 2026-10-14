@@ -16,6 +16,7 @@ Component::Component(
   this->rec.y = y;
   this->rec.width = width;
   this->rec.height = height;
+  this->onClick = NULL;
   win->AddCom(this);
 }
 

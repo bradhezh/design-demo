@@ -1,0 +1,2 @@
+mkdir -p build
+gcc `pkg-config --cflags gobject-2.0 raylib` -o build/demo src/*.c `pkg-config --libs gobject-2.0 raylib`

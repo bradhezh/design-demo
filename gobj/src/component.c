@@ -4,6 +4,8 @@
 #include "component.h"
 #include "window.h"
 
+#define PADDING 4
+
 // Class
 struct _Com {
   GObject parent_instance;
@@ -125,25 +127,31 @@ Com *com_new(char const *text, int font_size, Rectangle const *rec, Win *win) {
   return g_object_new(COM_TYPE, P_TEXT, text, P_FONT_SIZE, font_size, P_REC, rec, P_WIN, win, NULL);
   */
 
+  // Disabled for release with G_DISABLE_CHECKS defined
   g_return_val_if_fail(text && rec && win, NULL);
-  Com *self = COM_FLOATING_OBJ(g_object_new(COM_TYPE, NULL));
-  self->text = g_strdup(text);
-  self->font_size = font_size;
-  self->rec = *rec;
-  win_add_com(win, self);
-  self->win = win;
-  g_object_add_weak_pointer(G_OBJECT(self->win), (gpointer *)&self->win);
-  return self;
+  Com *com = COM_FLOATING_OBJ(g_object_new(COM_TYPE, NULL));
+  com->text = g_strdup(text);
+  com->font_size = font_size;
+  com->rec = *rec;
+  win_add_com(win, com);
+  com->win = win;
+  g_object_add_weak_pointer(G_OBJECT(com->win), (gpointer *)&com->win);
+  return com;
 }
 
-Rectangle const *com_rec(Com const *self) { return &self->rec; }
+Rectangle const *com_rec(Com const *self) {
+  g_return_val_if_fail(self, NULL);
+  return &self->rec;
+}
 
 void com_render(Com const *self) {
+  g_return_if_fail(self);
   DrawRectangleRec(self->rec, GREEN);
-  DrawText(self->text, self->rec.x + 4, self->rec.y + 4, self->font_size, BLACK);
+  DrawText(self->text, self->rec.x + PADDING, self->rec.y + PADDING, self->font_size, BLACK);
 }
 
 void com_clicked(Com *self) {
+  g_return_if_fail(self);
   gboolean ret;
   g_signal_emit(self, signals[CLICKED], 0, "emission", &ret);
   TraceLog(LOG_INFO, "Last return: %d", ret);

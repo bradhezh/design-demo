@@ -38,31 +38,33 @@ static void win_init(Win *self) { self->nodes = NULL; }
 
 Win *win_new(char const *title, Vector2 const *vec2) {
   g_return_val_if_fail(title && vec2, NULL);
-  Win *self = WIN_OBJ(g_object_new(WIN_TYPE, NULL));
+  Win *win = WIN_OBJ(g_object_new(WIN_TYPE, NULL));
   InitWindow(vec2->x, vec2->y, title);
-  return self;
+  return win;
 }
 
-void win_add_com(Win *win, Com *com) {
+void win_add_com(Win *self, Com *com) {
+  g_return_if_fail(self && com);
   ComNode *node = g_malloc(sizeof(ComNode));
   node->com = g_object_ref_sink(com);
   node->next = NULL;
-  if (!win->nodes) {
-    win->nodes = node;
+  if (!self->nodes) {
+    self->nodes = node;
     return;
   }
-  ComNode *p = win->nodes;
+  ComNode *p = self->nodes;
   for (; p->next; p = p->next)
     ;
   p->next = node;
 }
 
-void win_run(Win const *win) {
+void win_run(Win const *self) {
+  g_return_if_fail(self);
   EnableEventWaiting();
   while (!WindowShouldClose()) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
       Vector2 pos = GetMousePosition();
-      for (ComNode *p = win->nodes; p; p = p->next) {
+      for (ComNode *p = self->nodes; p; p = p->next) {
         if (CheckCollisionPointRec(pos, *com_rec(p->com))) {
           com_clicked(p->com);
         }
@@ -70,7 +72,7 @@ void win_run(Win const *win) {
     }
     BeginDrawing();
     ClearBackground(WHITE);
-    for (ComNode *p = win->nodes; p; p = p->next) {
+    for (ComNode *p = self->nodes; p; p = p->next) {
       com_render(p->com);
     }
     EndDrawing();

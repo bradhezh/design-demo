@@ -7,20 +7,21 @@
 #define HEIGHT 60
 #define MARGIN 8
 
-int main(void) {
-  InitWindow(WIDTH + MARGIN * 2, HEIGHT * 2 + MARGIN * 3, "Components");
-  // Reusable across different data of the type
-  void *com1 = ComNew("Component 1", FONT_SIZE, MARGIN, MARGIN, WIDTH, HEIGHT);
-  void *com2 = ComNew("Component 2", FONT_SIZE, MARGIN, HEIGHT + MARGIN * 2, WIDTH, HEIGHT);
+int main(int argc, char *argv[]) {
+  void *com1 = com_new("Component 1", FONT_SIZE, &(Rectangle){MARGIN, MARGIN, WIDTH, HEIGHT});
+  void *com2 =
+      com_new("Component 2", FONT_SIZE, &(Rectangle){MARGIN, HEIGHT + MARGIN * 2, WIDTH, HEIGHT});
 
+  InitWindow(WIDTH + MARGIN * 2, HEIGHT * 2 + MARGIN * 3, "Components");
   EnableEventWaiting();
   while (!WindowShouldClose()) {
     /* Event
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
       Vector2 pos = GetMousePosition();
-      if (CheckCollisionPointRec(pos, *ComRec(com1))) {
+      // Reusable across different instances
+      if (CheckCollisionPointRec(pos, *com_rec(com1))) {
         TraceLog(LOG_INFO, "Component 1 clicked");
-      } else if (CheckCollisionPointRec(pos, *ComRec(com2))) {
+      } else if (CheckCollisionPointRec(pos, *com_rec(com2))) {
         TraceLog(LOG_INFO, "Component 2 clicked");
       }
     }
@@ -28,15 +29,15 @@ int main(void) {
     // Render
     BeginDrawing();
     ClearBackground(WHITE);
-    // Reusable across different data of the type
-    ComRender(com1);
-    ComRender(com2);
+    // Reusable across different instances
+    com_render(com1);
+    com_render(com2);
     EndDrawing();
   }
-
-  // Reusable across different data of the type
-  ComDelete(com1);
-  ComDelete(com2);
   CloseWindow();
+
+  // Reusable across different instances
+  com_del(com1);
+  com_del(com2);
   return 0;
 }

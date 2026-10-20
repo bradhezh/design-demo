@@ -3,20 +3,19 @@
 
 #include <raylib.h>
 
-class Window;
+class Win;
 
-class Component {
+class Com {
 public:
   char *text;
-  int fontSize;
+  int font_size;
   Rectangle rec;
 
-  void (*onClick)();
+  void (*onClicked)();
 
-  Component(char const *text, int fontSize, int x, int y, int width, int height, Window *win);
-  ~Component();
-
-  void Render();
+  Com(char const *text, int font_size, int x, int y, int width, int height, Win *win);
+  ~Com();
+  void Render() const;
 };
 
 #endif // COMPONENT_H

@@ -7,22 +7,21 @@
 
 #define PADDING 4
 
-Component::Component(
-    char const *text, int fontSize, int x, int y, int width, int height, Window *win) {
+Com::Com(char const *text, int font_size, int x, int y, int width, int height, Win *win) {
   this->text = (char *)malloc(sizeof(char) * (strlen(text) + 1));
   strcpy(this->text, text);
-  this->fontSize = fontSize;
+  this->font_size = font_size;
   this->rec.x = x;
   this->rec.y = y;
   this->rec.width = width;
   this->rec.height = height;
-  this->onClick = NULL;
+  this->onClicked = NULL;
   win->AddCom(this);
 }
 
-Component::~Component() { free(this->text); }
+Com::~Com() { free(this->text); }
 
-void Component::Render() {
+void Com::Render() const {
   DrawRectangleRec(this->rec, GREEN);
-  DrawText(this->text, this->rec.x + PADDING, this->rec.y + PADDING, this->fontSize, BLACK);
+  DrawText(this->text, this->rec.x + PADDING, this->rec.y + PADDING, this->font_size, BLACK);
 }

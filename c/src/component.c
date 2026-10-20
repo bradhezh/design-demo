@@ -6,35 +6,29 @@
 
 #define PADDING 4
 
-typedef struct {
+struct _Com {
   char *text;
-  int fontSize;
+  int font_size;
   Rectangle rec;
-} Component;
+};
 
-void *ComNew(char const *text, int fontSize, int x, int y, int width, int height) {
-  Component *com = malloc(sizeof(Component));
-
+Com *com_new(char const *text, int font_size, Rectangle const *rec) {
+  Com *com = malloc(sizeof(Com));
   com->text = malloc(sizeof(char) * (strlen(text) + 1));
   strcpy(com->text, text);
-  com->fontSize = fontSize;
-  com->rec.x = x;
-  com->rec.y = y;
-  com->rec.width = width;
-  com->rec.height = height;
-
+  com->font_size = font_size;
+  com->rec = *rec;
   return com;
 }
 
-void ComDelete(void *com) {
-  free(((Component *)com)->text);
-  free(com);
+void com_del(Com *self) {
+  free(self->text);
+  free(self);
 }
 
-// Rectangle *ComRec(void *com) { return &((Component *)com)->rec; }
+// Rectangle const *com_rec(Com const *self) { return &self->rec; }
 
-void ComRender(void *com) {
-  Component *com0 = com;
-  DrawRectangleRec(com0->rec, GREEN);
-  DrawText(com0->text, com0->rec.x + PADDING, com0->rec.y + PADDING, com0->fontSize, BLACK);
+void com_render(Com const *self) {
+  DrawRectangleRec(self->rec, GREEN);
+  DrawText(self->text, self->rec.x + PADDING, self->rec.y + PADDING, self->font_size, BLACK);
 }

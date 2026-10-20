@@ -44,9 +44,9 @@ typedef struct _Win Win;
 // while g_object_ref_sink not increasing floating refs but eliminating floating marks has to be
 // used instead to assume their ownership. Note that g_object_ref_sink is the same as g_object_ref
 // for normal objects without floating marks. Typically, UI components are initially floating to be
-// managed by their containers. GObject also supports weak references (g_object_add_weak_pointer,
-// g_object_remove_weak_pointer), which are basically pointers without g_object_ref to assume target
-// ownership, but will automatically clear the pointer to NULL when the target is finalised.
+// managed by their containers. GObject also supports weak references, which are basically pointers
+// without g_object_ref to assume target ownership, but will automatically clear the pointer to NULL
+// when the target is finalised.
 G_DECLARE_FINAL_TYPE(Com, com, COM, FLOATING_OBJ, GInitiallyUnowned)
 #define COM_TYPE (com_get_type())
 

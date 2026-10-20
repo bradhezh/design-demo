@@ -1,13 +1,13 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-//#include <raylib.h>
+#include <raylib.h>
 
-void *ComNew(char const *text, int fontSize, int x, int y, int width, int height);
-void ComDelete(void *com);
+typedef struct _Com Com;
 
-// Rectangle *ComRec(void *com);
-
-void ComRender(void *com);
+Com *com_new(char const *text, int font_size, Rectangle const *rec);
+void com_del(Com *self);
+// Rectangle const *com_rec(Com const *self);
+void com_render(Com const *self);
 
 #endif // COMPONENT_H

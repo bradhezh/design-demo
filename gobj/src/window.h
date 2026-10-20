@@ -10,7 +10,7 @@ G_DECLARE_FINAL_TYPE(Win, win, WIN, OBJ, GObject)
 #define WIN_TYPE (win_get_type())
 
 Win *win_new(char const *title, Vector2 const *vec2);
-void win_add_com(Win *win, Com *com);
-void win_run(Win const *win);
+void win_add_com(Win *self, Com *com);
+void win_run(Win const *self);
 
 #endif // WINDOW_H

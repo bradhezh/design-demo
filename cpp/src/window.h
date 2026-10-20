@@ -1,22 +1,17 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-class Component;
+class Com;
+typedef struct _ComNode ComNode;
 
-typedef struct _Coms {
-  Component *com;
-  _Coms *next;
-} Coms;
-
-class Window {
+class Win {
 public:
-  Coms *coms;
+  ComNode *nodes;
 
-  Window(int width, int height, char const *title);
-  ~Window();
-
-  void AddCom(Component *com);
-  void Run();
+  Win(char const *title, int width, int height);
+  ~Win();
+  void AddCom(Com *com);
+  void Run() const;
 };
 
 #endif // WINDOW_H

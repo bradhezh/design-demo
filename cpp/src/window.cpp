@@ -52,7 +52,7 @@ void Win::Run() const {
     // Render
     BeginDrawing();
     ClearBackground(WHITE);
-    for (ComNode *p = nodes; p; p = p->next) {
+    for (ComNode *p = this->nodes; p; p = p->next) {
       p->com->Render();
     }
     EndDrawing();

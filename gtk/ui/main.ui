@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <object class="GtkWindow" id="window">
+    <property name="title">GTK4 Demo</property>
+    <property name="default-width">400</property>
+    <property name="default-height">200</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <property name="margin-top">24</property>
+        <property name="margin-bottom">24</property>
+        <property name="margin-start">24</property>
+        <property name="margin-end">24</property>
+        <child>
+          <object class="GtkEntry" id="message" />
+        </child>
+        <child>
+          <object class="GtkButton" id="toggle">
+            <property name="label">Greet</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

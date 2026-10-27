@@ -1,0 +1,21 @@
+<Application
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="Ava.App"
+  xmlns:local="using:Ava"
+  RequestedThemeVariant="Default"
+>
+  <!-- Used by Avalonia to get UI elements for data objects bound in XAML, for view-models to
+  operate states instead of UI operations. This works for navigation between views within an XAML,
+  e.g. <ContentControl Content="{Binding CurrentViewModel}" />, but navigation between windows or
+  dialogues with different XAMLs still needs to operate views. A common pattern is using a dedicated
+  navigation service, while keeping view-models isolated from UI operations. -->
+  <Application.DataTemplates>
+    <!-- ViewLocator.cs generated from avalonia.mvvm, instantiating views from view-models via
+    names, e.g. MyView from MyViewModel -->
+    <local:ViewLocator />
+  </Application.DataTemplates>
+  <Application.Styles>
+    <FluentTheme />
+  </Application.Styles>
+</Application>
